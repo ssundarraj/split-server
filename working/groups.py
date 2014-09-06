@@ -1,11 +1,11 @@
 from sqlalchemy import *
-from lib.metadata import engine, Groups_table, Group_Members_table, Group_Money_table
+from lib.metadata import engine, User_Info_table, Groups_table, Group_Members_table, Group_Money_table
 import json
 
 def new_group(details):
     conn=engine.connect()
                                                   
-    ins_q = Groups_table.insert(values= dict(group_name=details['user_phno'],
+    ins_q = Groups_table.insert(values= dict(user_id=details['user_id'],
                                               group_name=details['group_name'],))
     result=conn.execute(ins_q)
     conn.close()
@@ -14,11 +14,26 @@ def new_group(details):
     else:
         return 0
 
-def add_to_group(details):
+def new_group_member(details):
     conn=engine.connect()
                                                   
-    ins_q = Groups_Members_table.insert(values= dict(group_name=details['group_id'],
+    ins_q = Group_Members_table.insert(values= dict(group_id=details['group_id'],
                                               user_phno=details['user_phone'],))
+    result=conn.execute(ins_q)
+    conn.close()
+    if(result.inserted_primary_key[0] if result.is_insert else id_):
+        return result.inserted_primary_key[0]
+    else:
+        return 0
+
+def new_expense(details):
+    conn=engine.connect()
+                                                  
+    ins_q = Group_Money_table.insert(values= dict(group_id=details['group_id'],
+                                                   money_amount=details['amount'],
+                                                   money_desc=details['desc'],
+                                                   user_from_phno=details['user_from_phone'],
+                                                   user_to_phno=details['user_to_phone'],))
     result=conn.execute(ins_q)
     conn.close()
     if(result.inserted_primary_key[0] if result.is_insert else id_):
@@ -28,4 +43,4 @@ def add_to_group(details):
 
 
 if __name__ == '__main__':
-    print new_user_phno(json.dumps({"user_phone":"+919600063014"}))
+    print new_group(json.loads(json.dumps({"user_id":"1", "group_name":"test"})))
