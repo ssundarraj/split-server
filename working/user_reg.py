@@ -8,9 +8,10 @@ def new_user_phno(details):
     #check if phno is unique
     sel_q = select([User_Info_table]).where(User_Info_table.c.user_phno == details['user_phone'])
     sel_result=conn.execute(sel_q)
-    if len(sel_result.fetchall()):
+    rows=sel_result.fetchall()
+    if len(rows):
         conn.close()
-        return 0; #returns 0 if phno is not unique
+        return rows[-1]['user_id']; #returns 0 if phno is not unique
     ins_q = User_Info_table.insert(values= dict(user_phno=details['user_phone']))
     result=conn.execute(ins_q)
     conn.close()
