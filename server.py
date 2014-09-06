@@ -25,7 +25,7 @@ class API(Resource):
        return NoResource()
 
 
-#log.startLogging(DailyLogFile.fromFullPath('/var/log/twisted/error.log'), setStdout=False,)
+
 resourceroot = API()
 factory = Site(resourceroot,)
 reactor.listenTCP(8080, factory,)
