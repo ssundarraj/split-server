@@ -33,10 +33,20 @@ class Android(Resource):
                     from working.groups import new_group_member
                     return str(json.dumps({'group_member_id': new_group_member(params_details)}))
 
+                #Add expense to group
+                if(request.args['work_type'][0]=='new_expense'):
+                    from working.groups import new_expense
+                    return str(json.dumps({'group_expense_id': new_group_member(params_details)}))
+
                 #Get all groups for a user 
                 if(request.args['work_type'][0]=='load_groups'):
-                    from working.groups import load_groups
+                    from working.app_load import load_groups
                     return str(json.dumps(load_groups(params_details)))
+
+                #Get all group data
+                if(request.args['work_type'][0]=='load_groupdata'):
+                    from working.app_load import load_groupdata
+                    return str(json.dumps(load_groupdata(params_details)))
 
 
                 else: #invalid args

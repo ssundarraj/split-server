@@ -17,12 +17,12 @@ class API(Resource):
             if devicetype == "Android":
                 return Android()
             else:
-                return NoResource()
+                return "1111111111"+NoResource()
         except:
-             return NoResouce()
+             return "222222222222"+NoResouce()
 
     def render_GET(self, request):
-       return NoResource()
+       return "3333333"+NoResource()
 
 
 #log.startLogging(DailyLogFile.fromFullPath('/var/log/twisted/error.log'), setStdout=False,)
