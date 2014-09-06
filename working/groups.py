@@ -32,8 +32,7 @@ def new_expense(details):
     ins_q = Group_Money_table.insert(values= dict(group_id=details['group_id'],
                                                    money_amount=details['amount'],
                                                    money_desc=details['desc'],
-                                                   user_from_phno=details['user_from_phone'],
-                                                   user_to_phno=details['user_to_phone'],))
+                                                   user__phno=details['user_phone'],
     result=conn.execute(ins_q)
     conn.close()
     if(result.inserted_primary_key[0] if result.is_insert else id_):

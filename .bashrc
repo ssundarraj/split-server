@@ -1,1 +1,1 @@
-export PYTHONPATH="~/workspace/split-server"
+export PYTHONPATH=~/workspace/split-server

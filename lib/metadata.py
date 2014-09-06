@@ -15,12 +15,14 @@ Groups_table = schema.Table('Groups', metadata,
 )
  
 Group_Members_table = schema.Table('Group_Members', metadata, 
-                               schema.Column('group_id', types.Integer, primary_key=True),
+                               schema.Column('membership_id', types.Integer, primary_key=True),
+                               schema.Column('group_id', types.Integer),
                                schema.Column('user_phno', types.Unicode(20), default=u''),
 )
 
 Group_Money_table = schema.Table('Group_Money', metadata, 
-                               schema.Column('group_id', types.Integer, primary_key=True),
+                               schema.Column('transaction_id', types.Integer, primary_key=True),
+                               schema.Column('group_id', types.Integer),
                                schema.Column('user_phno', types.Unicode(20), default=u''),
                                schema.Column('money_desc', types.Unicode(255), default=u''),
                                schema.Column('money_amount', types.Unicode(20), default=u''),

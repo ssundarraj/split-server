@@ -15,7 +15,7 @@ class Android(Resource):
     def render_POST(self, request):
         print request.args
         try:
-            if(request.args["code"][0] == "Ingenuis2014"):
+            if(True):#request.args["code"][0] == "Ingenuis2014"):
                 params_details=json.loads(request.args['params'][0])
                 
                 #Registration
@@ -32,6 +32,11 @@ class Android(Resource):
                 if(request.args['work_type'][0]=='new_group_member'):
                     from working.groups import new_group_member
                     return str(json.dumps({'group_member_id': new_group_member(params_details)}))
+
+                #Get all groups for a user 
+                if(request.args['work_type'][0]=='load_groups'):
+                    from working.groups import load_groups
+                    return str(json.dumps(load_groups(params_details)))
 
 
                 else: #invalid args

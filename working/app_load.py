@@ -23,11 +23,9 @@ def load_groups(details):
 
 def load_groupdata(details):
     conn=engine.connect()
-    sel_q = select([Group_Money_table.c.group_name,
-                    Group_Money_table.c.user_from_phno,
-                    Group_Money_table.c.user_to_phno,
+    sel_q = select([Group_Money_table.c.user_phno,
                     Group_Money_table.c.money_desc,
-                    Group_Money_table.c.money_amount,]).where(Group_Money_table.c.user_id == details['user_id'])
+                    Group_Money_table.c.money_amount,]).where(Group_Money_table.c.group_id == details['group_id'])
     result=conn.execute(sel_q)
     rows=result.fetchall()
     ret_data = [dict(i) for i in rows]
@@ -37,4 +35,4 @@ def load_groupdata(details):
 
 
 if __name__ == '__main__':
-    print load_groups(json.loads(json.dumps({'user_id':'1', 'user_phone':'1234'})))
+    print load_groupdata(json.loads(json.dumps({'group_id':'1', 'user_phone':'1234'})))
