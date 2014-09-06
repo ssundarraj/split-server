@@ -26,24 +26,6 @@ Group_Money_table = schema.Table('Group_Money', metadata,
                                schema.Column('money_amount', types.Unicode(20), default=u''),
 )
 
-User_Friends_table = schema.Table('User_Freinds', metadata, 
-                               schema.Column('friendship_id', types.Integer, primary_key=True),
-                               schema.Column('user_id', types.Integer),
-                               schema.Column('second_user_id', types.Integer),
-                               schema.Column('friendship_status', types.Integer),
-)
-
-User_Requests_table = schema.Table('User_Requests', metadata, 
-                                   schema.Column('request_id', types.Integer, primary_key=True),
-                                   schema.Column('user_id', types.Integer),
-                                   schema.Column('second_user_id', types.Integer),
-                                   schema.Column('request_type', types.Unicode(255)),
-                                   schema.Column('request_status', types.Integer),
-                                   schema.Column('request_sent_time', types.DateTime, default=u''),
-                                   schema.Column('request_reply_time', types.DateTime, default=u''),
-)
-
-
 engine=create_engine(DB_URI, echo=False)
 
 metadata.bind=engine
